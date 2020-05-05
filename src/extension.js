@@ -1,69 +1,69 @@
 const vscode = require('vscode');
 const assert = require('assert');
-const PhpUnitCommand = require('./phpunit-command');
-const RemotePhpUnitCommand = require('./remote-phpunit-command.js');
-const DockerPhpUnitCommand = require('./docker-phpunit-command.js');
+const PestCommand = require('./pest-command');
+const RemotePestCommand = require('./remote-pest-command.js');
+const DockerPestCommand = require('./docker-pest-command.js');
 
 var globalCommand;
 
 module.exports.activate = function (context) {
     let disposables = [];
 
-    disposables.push(vscode.commands.registerCommand('better-phpunit.run', async () => {
+    disposables.push(vscode.commands.registerCommand('better-pest.run', async () => {
         let command;
 
-        if (vscode.workspace.getConfiguration("better-phpunit").get("docker.enable")) {
-            command = new DockerPhpUnitCommand;
-        } else if (vscode.workspace.getConfiguration("better-phpunit").get("ssh.enable")) {
-            command = new RemotePhpUnitCommand;
+        if (vscode.workspace.getConfiguration("better-pest").get("docker.enable")) {
+            command = new DockerPestCommand;
+        } else if (vscode.workspace.getConfiguration("better-pest").get("ssh.enable")) {
+            command = new RemotePestCommand;
         } else {
-            command = new PhpUnitCommand;
+            command = new PestCommand;
         }
 
         await runCommand(command);
     }));
 
-    disposables.push(vscode.commands.registerCommand('better-phpunit.run-file', async () => {
+    disposables.push(vscode.commands.registerCommand('better-pest.run-file', async () => {
         let command;
 
-        if (vscode.workspace.getConfiguration("better-phpunit").get("docker.enable")) {
-            command = new DockerPhpUnitCommand({ runFile: true });
-        } else if (vscode.workspace.getConfiguration("better-phpunit").get("ssh.enable")) {
-            command = new RemotePhpUnitCommand({ runFile: true });
+        if (vscode.workspace.getConfiguration("better-pest").get("docker.enable")) {
+            command = new DockerPestCommand({ runFile: true });
+        } else if (vscode.workspace.getConfiguration("better-pest").get("ssh.enable")) {
+            command = new RemotePestCommand({ runFile: true });
         } else {
-            command = new PhpUnitCommand({ runFile: true });
+            command = new PestCommand({ runFile: true });
         }
 
         await runCommand(command);
     }));
 
-    disposables.push(vscode.commands.registerCommand('better-phpunit.run-suite', async () => {
+    disposables.push(vscode.commands.registerCommand('better-pest.run-suite', async () => {
         let command;
 
-        if (vscode.workspace.getConfiguration("better-phpunit").get("docker.enable")) {
-            command = new DockerPhpUnitCommand({ runFullSuite: true });
-        } else if (vscode.workspace.getConfiguration("better-phpunit").get("ssh.enable")) {
-            command = new RemotePhpUnitCommand({ runFullSuite: true });
+        if (vscode.workspace.getConfiguration("better-pest").get("docker.enable")) {
+            command = new DockerPestCommand({ runFullSuite: true });
+        } else if (vscode.workspace.getConfiguration("better-pest").get("ssh.enable")) {
+            command = new RemotePestCommand({ runFullSuite: true });
         } else {
-            command = new PhpUnitCommand({ runFullSuite: true });
+            command = new PestCommand({ runFullSuite: true });
         }
 
         await runCommand(command);
     }));
 
-    disposables.push(vscode.commands.registerCommand('better-phpunit.run-previous', async () => {
+    disposables.push(vscode.commands.registerCommand('better-pest.run-previous', async () => {
         await runPreviousCommand();
     }));
 
-    disposables.push(vscode.tasks.registerTaskProvider('phpunit', {
+    disposables.push(vscode.tasks.registerTaskProvider('pest', {
         provideTasks: () => {
             return [new vscode.Task(
-                { type: "phpunit", task: "run" },
+                { type: "pest", task: "run" },
                 2,
                 "run",
-                'phpunit',
+                'pest',
                 new vscode.ShellExecution(globalCommand.output),
-                '$phpunit'
+                '$pest'
             )];
         }
     }));
@@ -75,15 +75,15 @@ async function runCommand(command) {
     setGlobalCommandInstance(command);
 
     vscode.window.activeTextEditor
-        || vscode.window.showErrorMessage('Better PHPUnit: open a file to run this command');
+        || vscode.window.showErrorMessage('Better Pest: open a file to run this command');
 
     await vscode.commands.executeCommand('workbench.action.terminal.clear');
-    await vscode.commands.executeCommand('workbench.action.tasks.runTask', 'phpunit: run');
+    await vscode.commands.executeCommand('workbench.action.tasks.runTask', 'pest: run');
 }
 
 async function runPreviousCommand() {
     await vscode.commands.executeCommand('workbench.action.terminal.clear');
-    await vscode.commands.executeCommand('workbench.action.tasks.runTask', 'phpunit: run');
+    await vscode.commands.executeCommand('workbench.action.tasks.runTask', 'pest: run');
 }
 
 function setGlobalCommandInstance(commandInstance) {

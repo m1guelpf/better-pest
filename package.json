@@ -1,79 +1,79 @@
 {
-    "name": "better-phpunit",
-    "displayName": "Better PHPUnit",
-    "description": "A better PHPUnit test runner",
-    "version": "1.5.1",
-    "publisher": "calebporzio",
+    "name": "better-pest",
+    "displayName": "Better Pest",
+    "description": "A better Pest test runner",
+    "version": "0.0.1",
+    "publisher": "m1guelpf",
     "engines": {
         "vscode": "^1.17.0"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/calebporzio/better-phpunit.git"
+        "url": "https://github.com/m1guelpf/better-pest.git"
     },
     "icon": "icon.png",
     "categories": [
         "Other"
     ],
     "activationEvents": [
-        "onCommand:better-phpunit.run",
-        "onCommand:better-phpunit.run-file",
-        "onCommand:better-phpunit.run-suite"
+        "onCommand:better-pest.run",
+        "onCommand:better-pest.run-file",
+        "onCommand:better-pest.run-suite"
     ],
     "main": "./src/extension",
     "contributes": {
         "commands": [
             {
-                "command": "better-phpunit.run",
-                "title": "Better PHPUnit: run"
+                "command": "better-pest.run",
+                "title": "Better Pest: run"
             },
             {
-                "command": "better-phpunit.run-file",
-                "title": "Better PHPUnit: run file"
+                "command": "better-pest.run-file",
+                "title": "Better Pest: run file"
             },
             {
-                "command": "better-phpunit.run-suite",
-                "title": "Better PHPUnit: run suite"
+                "command": "better-pest.run-suite",
+                "title": "Better Pest: run suite"
             },
             {
-                "command": "better-phpunit.run-previous",
-                "title": "Better PHPUnit: run previous"
+                "command": "better-pest.run-previous",
+                "title": "Better Pest: run previous"
             }
         ],
         "keybindings": [
             {
                 "key": "cmd+k cmd+r",
-                "command": "better-phpunit.run"
+                "command": "better-pest.run"
             },
             {
                 "key": "cmd+k cmd+f",
-                "command": "better-phpunit.run-file"
+                "command": "better-pest.run-file"
             },
             {
                 "key": "cmd+k cmd+p",
-                "command": "better-phpunit.run-previous"
+                "command": "better-pest.run-previous"
             }
         ],
         "configuration": {
-            "title": "Better PHPUnit configuration",
+            "title": "Better Pest configuration",
             "properties": {
-                "better-phpunit.commandSuffix": {
+                "better-pest.commandSuffix": {
                     "type": [
                         "string",
                         "null"
                     ],
                     "default": null,
-                    "description": "This string will be appended to the phpunit command, it's a great place to add flags like '--stop-on-failure'"
+                    "description": "This string will be appended to the pest command, it's a great place to add flags like '--stop-on-failure'"
                 },
-                "better-phpunit.phpunitBinary": {
+                "better-phpunit.pestBinary": {
                     "type": [
                         "string",
                         "null"
                     ],
                     "default": null,
-                    "description": "A custom phpunit binary. Ex: 'phpunit', '/usr/local/bin/phpunit'"
+                    "description": "A custom pest binary. Ex: 'pest', '/usr/local/bin/pest'"
                 },
-                "better-phpunit.xmlConfigFilepath": {
+                "better-pest.xmlConfigFilepath": {
                     "type": [
                         "string",
                         "null"
@@ -81,7 +81,7 @@
                     "default": null,
                     "description": "Absolute path for the PHPUnit XML configuration file"
                 },
-                "better-phpunit.suiteSuffix": {
+                "better-pest.suiteSuffix": {
                     "type": [
                         "string",
                         "null"
@@ -89,12 +89,12 @@
                     "default": null,
                     "description": "Specify options to appended only to the 'run suite' command, for example add options like '--testsuite unit' or '--coverage  --coverage-xml'"
                 },
-                "better-phpunit.ssh.enable": {
+                "better-pest.ssh.enable": {
                     "type": "boolean",
                     "default": false,
                     "description": "Run tests over SSH"
                 },
-                "better-phpunit.ssh.user": {
+                "better-pest.ssh.user": {
                     "type": [
                         "string",
                         "null"
@@ -102,7 +102,7 @@
                     "default": null,
                     "description": "The user to connect as when running test via SSH"
                 },
-                "better-phpunit.ssh.host": {
+                "better-pest.ssh.host": {
                     "type": [
                         "string",
                         "null"
@@ -110,19 +110,19 @@
                     "default": null,
                     "description": "The hostname to use when running tests via SSH"
                 },
-                "better-phpunit.ssh.port": {
+                "better-pest.ssh.port": {
                     "type": [
                         "integer"
                     ],
                     "default": 22,
-                    "description": "The port to use when running tests via SSH.  Deprecated, set better-phpunit.options to '-p[port]' on Linux/Mac, and '-P [port]' on Windows."
+                    "description": "The port to use when running tests via SSH.  Deprecated, set better-pest.options to '-p[port]' on Linux/Mac, and '-P [port]' on Windows."
                 },
-                "better-phpunit.ssh.paths": {
+                "better-pest.ssh.paths": {
                     "type": "object",
                     "default": {},
                     "description": "The SSH path map. Keys are local (host) paths and values are remote (guest) paths."
                 },
-                "better-phpunit.ssh.binary": {
+                "better-pest.ssh.binary": {
                     "type": [
                         "string",
                         "null"
@@ -130,12 +130,12 @@
                     "default": null,
                     "description": "The path (and flags) to an SSH-compatible binary. If null it will use SSH on *nix and Putty on Windows."
                 },
-                "better-phpunit.ssh.disableAllOptions": {
+                "better-pest.ssh.disableAllOptions": {
                     "type": "boolean",
                     "default": false,
                     "description": "Do not include any config options in SSH command."
                 },
-                "better-phpunit.ssh.options": {
+                "better-pest.ssh.options": {
                     "type": [
                         "string",
                         "null"
@@ -143,12 +143,12 @@
                     "default": null,
                     "description": "Additional command line options to pass to ssh/putty/plink"
                 },
-                "better-phpunit.docker.enable": {
+                "better-pest.docker.enable": {
                     "type": "boolean",
                     "default": false,
                     "description": "Run tests within a Docker container"
                 },
-                "better-phpunit.docker.command": {
+                "better-pest.docker.command": {
                     "type": [
                         "string",
                         "null"
@@ -156,7 +156,7 @@
                     "default": null,
                     "description": "The Docker command to execute a container. If null, an error will be thrown during execution."
                 },
-                "better-phpunit.docker.paths": {
+                "better-pest.docker.paths": {
                     "type": "object",
                     "default": {},
                     "description": "The docker path map. Keys are local (host) paths and values are remote (container) paths."
@@ -165,7 +165,7 @@
         },
         "problemMatchers": [
             {
-                "name": "phpunit",
+                "name": "pest",
                 "owner": "php",
                 "fileLocation": "absolute",
                 "pattern": [
@@ -186,7 +186,7 @@
         ],
         "taskDefinitions": [
             {
-                "type": "phpunit",
+                "type": "pest",
                 "required": [
                     "task"
                 ],
