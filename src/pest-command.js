@@ -89,7 +89,7 @@ module.exports = class PestCommand {
 
         while (line > 0) {
             const lineText = vscode.window.activeTextEditor.document.lineAt(line).text;
-            const match = lineText.match(/^\s*it\(([^,)]+)/m);
+            const match = lineText.match(/^\s*(?:it|test|get)\(([^,)]+)/m);
             if (match) {
                 method = match[1];
                 break;
