@@ -2,7 +2,7 @@
     "name": "better-pest",
     "displayName": "Better Pest",
     "description": "A better Pest test runner",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "publisher": "m1guelpf",
     "engines": {
         "vscode": "^1.17.0"
