@@ -76,6 +76,8 @@ Running tests in already running Docker containers:
 }
 ```
 
+> You can use `${workspaceFolder}` in your local paths to define a wildcard for the currently open workspace. 
+
 Running tests with Docker Compose, starting up a service and removing the container when finished:
 ```
 {
