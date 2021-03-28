@@ -3,7 +3,11 @@ const RemotePestCommand = require('./remote-pest-command');
 
 module.exports = class DockerPestCommand extends RemotePestCommand {
     get paths() {
-        return this.config.get("docker.paths");
+        let paths = {}; 
+        for (const [localPath, remotePath] of Object.entries(this.config.get("docker.paths"))) {
+            paths[ localPath.replace('${workspaceRoot}', vscode.workspace.rootPath) ] = remotePath; 
+        }
+        return paths;
     }
 
     get dockerCommand() {
