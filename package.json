@@ -65,7 +65,7 @@
                     "default": null,
                     "description": "This string will be appended to the pest command, it's a great place to add flags like '--stop-on-failure'"
                 },
-                "better-phpunit.pestBinary": {
+                "better-pest.pestBinary": {
                     "type": [
                         "string",
                         "null"
