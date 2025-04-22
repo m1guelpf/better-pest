@@ -39,7 +39,7 @@ module.exports = class PestCommand {
     }
 
     get filter() {
-        return this.method ? ` --filter ${this.method}` : '';
+        return this.method ? ` --filter /${this.method}/` : '';
     }
 
     get configuration() {
